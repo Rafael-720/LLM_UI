@@ -2,7 +2,7 @@
 
 Uma interface web moderna e responsiva para interagir com modelos de linguagem locais (via Ollama), oferecendo suporte nativo para conversação por voz em tempo real, transcrição de áudio e geração de imagens.
 
-![LLM UI Screenshot](https://via.placeholder.com/800x400?text=LLM+UI+Screenshot)
+
 
 ## 🚀 Funcionalidades Principais
 
