@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+requests
+python-multipart
+openai-whisper
+diffusers
+transformers
+accelerate
+edge-tts

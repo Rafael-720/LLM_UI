@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM UI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i data-lucide="bot" class="logo-icon"></i>
+                <span>LLM UI</span>
+            </div>
+            <div class="header-controls">
+                <button id="settings-btn" class="icon-btn" title="Settings">
+                    <i data-lucide="settings"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Settings</h2>
+                    <button id="close-settings" class="icon-btn"><i data-lucide="x"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-item">
+                        <label for="whisper-model-select">Whisper Model Size</label>
+                        <select id="whisper-model-select">
+                            <option value="tiny">Tiny (Fastest, Low Accuracy)</option>
+                            <option value="base">Base (Balanced)</option>
+                            <option value="small">Small</option>
+                            <option value="medium">Medium (Slower, Better Accuracy)</option>
+                            <option value="large">Large (Slowest, Best Accuracy)</option>
+                        </select>
+                        <p class="setting-desc">Larger models require more RAM and are slower.</p>
+                    </div>
+                    <div class="setting-item" style="margin-top: 1rem;">
+                        <label for="whisper-device-select">Device</label>
+                        <select id="whisper-device-select">
+                            <option value="cpu">CPU</option>
+                            <option value="cuda">GPU (CUDA)</option>
+                        </select>
+                        <p class="setting-desc">Use GPU for faster transcription (requires NVIDIA GPU + Drivers).</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="save-settings" class="primary-btn">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <main id="chat-container">
+            <div id="empty-state" class="empty-state">
+                <div class="llama-icon">🦙</div>
+                <h1>How can I help you today?</h1>
+            </div>
+            <div id="messages" class="messages-list">
+                <!-- Messages will appear here -->
+            </div>
+        </main>
+
+        <div class="input-area-wrapper">
+            <div class="input-container">
+                <div class="input-box">
+                    <textarea id="user-input" placeholder="Send a message..." rows="1"></textarea>
+
+                    <div class="input-controls">
+                        <div class="left-controls">
+                            <button id="mic-btn" class="icon-btn" title="Record Audio">
+                                <i data-lucide="mic"></i>
+                            </button>
+                            <button id="image-btn" class="icon-btn" title="Generate Image">
+                                <i data-lucide="image"></i>
+                            </button>
+                            <button id="audio-btn" class="icon-btn" title="Generate Audio">
+                                <i data-lucide="volume-2"></i>
+                            </button>
+                            <button id="voice-mode-btn" class="icon-btn" title="Toggle Voice Mode (Auto-TTS)">
+                                <i data-lucide="headphones"></i>
+                            </button>
+                            <div id="recording-indicator" class="recording-indicator hidden">
+                                <span class="pulse"></span>
+                                <span id="recording-timer">00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="right-controls">
+                            <div class="model-selector-wrapper">
+                                <select id="model-select">
+                                    <option value="" disabled selected>Select Model</option>
+                                    <!-- Options populated by JS -->
+                                </select>
+                                <i data-lucide="chevron-down" class="select-icon"></i>
+                            </div>
+                            <button id="stop-btn" class="stop-btn hidden" title="Stop Generation">
+                                <i data-lucide="square"></i>
+                            </button>
+                            <button id="send-btn" class="send-btn" disabled>
+                                <i data-lucide="arrow-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-text">
+                LLM UI can make mistakes. Consider checking important information.
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
